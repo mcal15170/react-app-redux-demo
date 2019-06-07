@@ -1,25 +1,28 @@
-import React, { Component } from 'react'
-import { connect } from "react-redux"
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class AdminInfo extends Component {
-    render() {
-        return (
-            <div>
-                <h5>Admin  "{this.props.name}"</h5>
-                
-            </div>
-        )
-    }
+  render() {
+    const user = this.props.users.map((data,i) => {
+      return <li key={i}>{data.name}</li>;
+    });
+    return (
+      <div>
+        <h2>User List</h2>
+        <ul>{user}</ul>
+      </div>
+    );
+  }
 }
 function mapStateToProps(state) {
-    return {
-      name: state.user.userName
-    };
-  }
-  function mapDisplatchToProps(dispatch){
-  return({
-  
-  })
-  }
-  export default connect(mapStateToProps,mapDisplatchToProps)(AdminInfo);
-  
+  return {
+    users: state.user
+  };
+}
+function mapDisplatchToProps(dispatch) {
+  return {};
+}
+export default connect(
+  mapStateToProps,
+  mapDisplatchToProps
+)(AdminInfo);

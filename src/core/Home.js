@@ -12,8 +12,13 @@ class Home extends Component {
   }
 
   changeState = () => {
-    this.props.changeStateToReducer(this.state.txtName);
-    this.setState({txtName:''});
+    if(this.state.txtName){
+      this.props.changeStateToReducer({name:this.state.txtName});
+      this.setState({ txtName: "" });
+    }else{
+      alert("name is empty!");
+    }
+    
   };
 
   changeHandler = event => {
@@ -25,7 +30,6 @@ class Home extends Component {
     return (
       <div>
         <h2>Home page</h2>
-        <p>Created by {this.props.name} and id : {this.props.id}</p>
         <input
           type="text"
           name="txtName"
@@ -34,17 +38,14 @@ class Home extends Component {
           onChange={this.changeHandler}
         />
         <button onClick={this.changeState}>Change State</button>
-        <Link to={`/admin`}>Go To About</Link>
+        {/* <Link to={`/admin`}>Go To About</Link> */}
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return {
-    name: state.user.userName,
-    id: state.user.roll
-  };
+  return {};
 }
 function mapDisplatchToProps(dispatch) {
   return {

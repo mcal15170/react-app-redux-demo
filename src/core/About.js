@@ -4,10 +4,17 @@ import { Link } from "react-router-dom";
 
 class About extends Component {
     render() {
+        const userLen=Object.keys(this.props.lastUser).length;
+        const user=this.props.lastUser.map((data,i)=>{
+            if(userLen === i+1){
+               return <div key={i}>{data.name}</div>
+            }
+        })
         return (
             <div>
-                <h2>About Page  by {this.props.name}</h2>
-                <Link to={`/`}>Go To Home</Link>
+                <h2>Last added User</h2>
+                <h5>Total Recoreds : {userLen}</h5>
+                <h5>Last User : {user}</h5>
                 
             </div>
         )
@@ -17,7 +24,7 @@ class About extends Component {
 
 function mapStateToProps(state) {
     return {
-      name: state.user.userName
+      lastUser: state.user
     };
   }
   function mapDisplatchToProps(dispatch){
